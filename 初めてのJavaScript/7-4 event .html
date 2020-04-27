@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			window.onload = setupEvents;
+			
+			function setupEvents() {
+				document.onmousedown = function (event) {
+					var theEvent = event ? event : window.event;
+					alert("ドキュメント全体のイベントハンドラを起動。\nイベントのtypeは:" + theEvent.type);
+				};
+				
+				document.getElementById("outer").onmousedown = function() {
+					alert("外側のdiv要素のイベントハンドラを起動");
+				};
+				
+				document.getElementById("inner").onmousedown = function () {
+					alert("内側のdiv要素のイベントハンドラを起動");
+				};
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		body内
+		<div id="outer" style="padding:20px; background-color:#ff0; width:150px">
+			外側のdiv要素
+			<div id="inner" style="background-color:#f00; width:100px; height:100px;">
+				内側のdiv要素
+			</div>
+		</div>
+	</body>
+</html>

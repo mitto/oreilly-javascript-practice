@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			catchEvent(window, "load", setupEvents);
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if (eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if (eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function setupEvents(event) {
+				document.getElementById("namefield").focus();
+				var eventObject = document.getElementById("panicbutton");
+				catchEvent(eventObject, "click", openHelp);
+			}
+			
+			function openHelp(x) {
+				var optionString = "width=200,height=150,menubar=no,toolbar=no,scrollbars=no,location=no,resizeable=no";
+				var helpWindow = window.open("9-3 help.html", "test", optionString);
+				helpWindow.focus();
+				helpWindow.moveTo(x.screenX,  x.screenY);
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form id="currentForm" action="">
+			<p>
+				お名前：<input type="text" size="50" id="namefield" />
+			</p>
+		</form>
+		<div id="panicbutton" style="width:300px; height:40px; background-color:#f00; padding:5px; margin-left:50px; text-align:center;">
+			<p>ヘルプが必要ならクリック</p>
+		</div>
+	</body>
+</html>

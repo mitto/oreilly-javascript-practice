@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			catchEvent(window, "load", setupEvents);
+			
+			//eventObj:イベントハンドラの登録対象オブジェクト
+			//event：登録するイベントの種類
+			//eventHandler：実際に登録するイベントハンドラ
+			function catchEvent(eventObj, event, eventHandler) {
+				if(eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				} else if (eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function setupEvents(event) {
+				catchEvent(document.getElementById("someForm"), "submit", checkForm);
+			}
+			
+			//8-2
+			function cancelEvents(event) {
+				if(event.preventDefault) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				else {
+					event.returnValue = false;
+					event.cancelBubble = true;
+				}
+			}
+			
+			function checkForm(event) {
+				var theEvent = event ? event : window.event;
+				var opts = document.getElementById("someForm").selectOpts.options;
+				
+				for(var i = 0; i < opts.length; i++) {
+					if(opts[i].selected) {
+						//alert(opts[i].text + " " + opts[i].value);
+						opts[i] = null;
+					}
+				}
+				//return false; //サーバー側の処理がないため送信をキャンセル
+				cancelEvents(theEvent);
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form id="someForm" action="">
+			<p>
+				<select id="selectOpts" multiple="multiple">
+					<option value="opt1">選択肢1</option>
+					<option value="opt2">選択肢2</option>
+					<option value="opt3">選択肢3</option>
+					<option value="opt4">選択肢4</option>
+					<option value="opt5">選択肢5</option>
+				</select>
+				<input type="submit" value="送信" />
+			</p>
+		</form>
+	</body>
+</html>

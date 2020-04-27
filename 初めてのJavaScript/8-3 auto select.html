@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			catchEvent(window, "load", setupEvents);
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if(eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if(eventObj.attachEvent) {
+					event = "on" + event;
+					eventObje.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function cancelEvent(event) {
+				if(event.preventDefault) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				else {
+					event.returnValue = false;
+					event.cancelBubble = true;
+				}
+			}
+			
+			function setupEvents(event) {
+				catchEvent(document.getElementById("selectOpts"), "change", checkSelect);
+			}
+			
+			function checkSelect(event) {
+				var theEvent = event ? event : window.event;
+				var opts = document.getElementById("someForm").selectOpts.options;
+				
+				for(var i = 0; i < opts.length; i++) {
+					if(opts[i].selected) {
+						switch(opts[i].value) {
+							case "Opt1":
+								opts[i + 1].selected = true;
+								break;
+							case "Opt3":
+								opts[i + 1].selected = true;
+								break;
+							case "Opt4":
+								opts[i + 1].selected = true;
+								break;
+						} //switch
+					} //if
+				} //for
+				
+				cancelEvent(theEvent);
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form id="someForm" action="">
+			<p>
+				<select id="selectOpts" multiple="multiple">
+					<option value="Opt1">選択肢1</option>
+					<option value="Opt1a"> -- 選択肢1A</option>
+					<option value="Opt2">選択肢2</option>
+					<option value="Opt3">選択肢3</option>
+					<option value="Opt3a"> -- 選択肢3A</option>
+					<option value="Opt4">選択肢4</option>
+					<option value="Opt4a"> -- 選択肢4A</option>
+					<option value="Opt5">選択肢5</option>
+				</select>
+				<input type="submit" value="送信" />
+			</p>
+		</form>
+	</body>
+</html>

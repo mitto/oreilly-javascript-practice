@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			//外側の関数
+			function generateGreeting(aisatsu) {
+				var kutouten = " ! ";
+				//内側の関数
+				function returnGreeting(aite) {
+					return aisatsu + "、" + aite + kutouten;
+				}
+				return returnGreeting;
+			}
+			
+			function processNested() {
+				//returnGreetingにアクセスできるようgenerateGreetingを呼び出して、
+				//戻り値として関数returnGreetingを受け取る
+				var morning = generateGreeting("おはようございます");
+				
+				var s = morning("山本さん");
+				document.writeln(s + "<br />");
+				
+				s = morning("上田君");
+				document.writeln(s + "<br />");
+				
+				var daytime = generateGreeting("こんにちは");
+				
+				s = daytime("亜依ちゃん");
+				document.writeln(s + "<br />");
+				
+				var night = generateGreeting("こんばんは");
+				
+				s = night("日和さん");
+				document.writeln(s + "<br />");
+				
+				s = night("亜依ちゃん");
+				document.writeln(s + "<br />");
+			}
+			
+			processNested();
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

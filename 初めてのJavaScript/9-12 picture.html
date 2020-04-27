@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			var currentPhoto = 0;
+			var pics = new Array();
+			
+			window.onload = function() {
+				
+				for (var i = 0; i < 5; i++) {
+					pics[i] = new Image();
+					pics[i].src = "pictno" + (i + 1) + ".jpg";
+				}
+				
+				document.getElementById("next").onclick = nextPic;
+				document.getElementById("prev").onclick = prevPic;
+				
+			}
+			
+			function changePhoto(photo) {
+				document.images[0].src = pics[photo].src;
+			}
+			
+			function nextPic() {
+				if (currentPhoto < pics.length - 1) {
+					currentPhoto++;
+					changePhoto(currentPhoto);
+				}
+				else {
+					alert("最後の画像です");
+				}
+			}
+			
+			function prevPic() {
+				if (currentPhoto > 0) {
+					currentPhoto--;
+					changePhoto(currentPhoto);
+				}
+				else {
+					alert("最初の画像です");
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div style="text-align: center;">
+			<span id="prev">[前]</span> &nbsp;
+			<span id="next">[次]</span><br />
+			<img src="pictno1.jpg" />
+		</div>
+	</body>
+</html>

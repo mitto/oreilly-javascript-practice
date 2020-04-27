@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				overflow: hidden;
+				position: relative;
+				top: 100px;
+				left: 100px;
+				border: 5px solid #000;
+				width: 400px;
+				height: 200px;
+			}
+			
+			img {
+				border: 1px solid #000;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			//グローバル変数
+			var dragObject = null;
+			var mouseOffset = null;
+			
+			//マウスイベントの捕捉(キャプチャ)
+			document.onmousemove = mouseMove;
+			document.onmouseup = mouseUp;
+			
+			window.onload = function() {
+				makeDraggable("img1");
+			}
+			
+			//マウスポイント
+			function MousePoint(x, y) {
+				this.x = x;
+				this.y = y;
+			}
+			
+			//マウスの位置
+			function mousePosition(event) {
+				var x = event.clientX;
+				var y = event.clientY;
+				return new MousePoint(x, y);
+			}
+			
+			//ページ内の要素のオフセット位置
+			function getMouseOffset(target, event) {
+				var theEvent = event ? event : window.event;
+				var mousePos = mousePosition(theEvent);
+				
+				var x = mousePos.x - target.offsetLeft;
+				var y = mousePos.y - target.offsetTop;
+				return new MousePoint(x, y);
+			}
+			
+			//ドラッグをオフに
+			function mouseUp(event) {
+				dragObject = null;
+			}
+			
+			//ドラッグしている場合のみマウスの動きを捕捉
+			function mouseMove(event) {
+				if (!dragObject) return;
+				
+				var theEvent = event ? event : window.event;
+				var mousePos = mousePosition(theEvent);
+				
+				//ドラッグ可能ならば、新たな絶対位置を設定
+				dragObject.style.position = 'relative';
+				dragObject.style.top = mousePos.y - mouseOffset.y + "px";
+				dragObject.style.left = mousePos.x - mouseOffset.x + "px";
+				return false;
+			}
+			
+			//オブジェクトをドラッグ可能にする
+			function makeDraggable(item) {
+				if (item) {
+					item = document.getElementById(item);
+					item.onmousedown = function(theEvent) {
+						dragObject = this;
+						mouseOffset = getMouseOffset(this, theEvent);
+						return false;
+					};
+				}
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<img id="img1" src="pictno1.jpg" alt="例題の図" />
+		</div>
+	</body>
+</html>

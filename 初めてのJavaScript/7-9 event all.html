@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			//グローバル変数
+			var IsDomLevel2;
+			var IsIE;
+			var FormObj;
+			var ButtonObj;
+			
+			window.onload = setup;
+			window.onunload = cleanup;
+			
+			function setup(event) {
+				formObj = document.getElementById("form1");
+				buttonObj = document.getElementById("submit1");
+				
+				//オブジェクトモデルごとのテスト
+				if(formObj.addEventListener) {
+					IsDomLevel2 = true;
+					IsIE = false;
+				}
+				else if(formObj.attachEvent) {
+					IsDomLevel2 = false;
+					IsIE = true;
+				}
+				else {
+					IsDomLevel2 = IsIE = false;
+				}
+				
+				if(IsDomLevel2) { //火狐など
+					formObj.addEventListener("click", alertBubblingUp, false);
+					buttonObj.addEventListener("click", alertBubblingUp, false);
+				}
+				else if(IsIE) {
+					formObj.attachEvent("onclick", alertBubblingUp);
+					buttonObj.attachEvent("onclick", alertBubblingUp);
+				}
+				else {
+					alert("このブラウザでは処理ができません");
+				}
+			}
+			
+			function alertBubblingUp(event) {
+				var e = event || window.event;
+				
+				if(IsDomLevel2) {
+					alert("バブルアップ:" + this);
+				}
+				else if(IsIE) {
+					alert("バブルアップ：" + e.srcElement);
+				}
+				else {
+					alert("バブルアップ：DOMレベル0");
+				}
+			}
+			
+			function cleanup() {
+				var formObj = document.getElementById("form1");
+				var buttonObj = document.getElementById("submit1");
+				
+				if(formObj.detachEvent) {
+					//alert("IE用のお掃除");
+					formObj.detachEvent("onclick", clickMe);
+					buttonObj.detachEvent("onclick", clickMe);
+				}
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form id="form1" style="background-color:#ff0; width:100px; height: 100px; padding: 20px;">
+			<input id="submit1" type="submit" value="送信" />
+		</form>
+	</body>
+</html>

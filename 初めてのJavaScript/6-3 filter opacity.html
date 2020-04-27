@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			div {
+				position: absolute;
+				top: 30px;
+				left: 50px;
+			}
+			#div1 img {
+				filter:
+				progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://www.google.co.jp/logos/classicplus.png, sizingMethod='scale');
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			window.onload = function() {
+				var divElement = document.getElementById("div1");
+				
+				//filterが存在するかどうかの検証
+				var tst1 = (divElement.style.filter) ? "filterが存在します" : "filterが存在しません";
+				console.log(tst1);
+				
+				//filterが存在するかどうかの検証
+				var tst2 = (typeof(divElement.style.filter) !== undefined) ? "filterが存在します" : "filterが存在しません";
+				console.log(tst2);
+				
+				//filterが存在するかどうかの検証
+				var tst3 = (divElement.style.filter !== undefined) ? "filterが存在します" : "filterが存在しません";
+				console.log(tst3);
+				
+				//opacityが存在するかどうかの検証
+				var tst4 = (divElement.style.opacity) ? "opacityが存在します" : "opacityが存在しません";
+				console.log(tst4);
+				
+				var tst5 = (typeof(divElement.style.opacity) !== "undefined") ? "opacityが存在します" : "opacityが存在しません";
+				console.log(tst5);
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<img src="http://www.google.co.jp/logos/classicplus.png" alt="" />
+		</div>
+	</body>
+</html>

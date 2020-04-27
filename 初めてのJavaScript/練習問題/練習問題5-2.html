@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+		
+			function convertNumberToWago(array) {
+				
+				var changeTable = ["ひとつ", "ふたつ", "みっつ", "よっつ", "いつつ", "むっつ", "ななつ", "やっつ", "ここのつ", "とお"]
+			
+				for(var item in array) {
+					console.log("変換前item:%s %s", item, array[item]);
+					array[item] = changeTable[array[item] - 1];
+					console.log("変換後item:%s %s", item, array[item]);
+				}
+			}
+			
+			function test() {
+			
+				var testArray = [3, 5, 1];
+				convertNumberToWago(testArray);
+				
+				document.writeln(testArray);
+			
+			}
+		
+			test();
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

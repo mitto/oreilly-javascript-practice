@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				document.writeln("<h1>screenオブジェクト</h1>\n<p>");
+				for (var item in screen) {
+					document.writeln("screen." + item + " : " + screen[item] + "<br />");
+				}
+				document.writeln("</p>");
+				
+				document.writeln("<h1>navigatorオブジェクト</h1>\n<p>");
+				
+				for (var item in navigator) {
+					document.writeln("navigator." + item + " : " + navigator[item] + "<br />");
+				}
+				
+				for (var i = 0, len = navigator.mimeTypes.length; i < len; i++) {
+					var mimeType = navigator.mimeTypes[i];
+					for (var item in mimeType) {
+						document.writeln("navigator.mimeTypes[" + i + "]." + item + " : " + mimeType[item] + "<br />");
+					} //for
+				} //for
+				
+				for (var i = 0, len = navigator.plugins.length; i < len; i++) {
+					var plugin = navigator.plugins[i];
+					for (var item in plugin) {
+						document.writeln("navigator.plugin[" + i + "]." + item + " : " + plugin[item] + "<br />");
+					} //for
+				} //for
+				document.writeln("</p>");
+				
+				document.onclick = function() {
+					history.back();
+					//return false;
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

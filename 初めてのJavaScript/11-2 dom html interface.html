@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+			
+				//表と画像を取得する
+				var tbl = document.getElementById("table1");
+				tbl.border = "5px";
+				tbl.cellPadding = "5px";
+				
+				var img = document.getElementById("img1");
+				img.vspace = "10";
+				
+				//属性を表記するために、表の行を追加する
+				var row1 = tbl.insertRow(-1);
+				
+				//二つのセルを表に作成する
+				var cell1 = row1.insertCell(0);
+				var cell2 = row1.insertCell(1);
+				
+				//テキストの値を作成する
+				var txtAttr1 = document.createTextNode("src");
+				var txtAttr1Val = document.createTextNode(img.src);
+				
+				//テキストの値をセルに入れる
+				cell1.appendChild(txtAttr1);
+				cell2.appendChild(txtAttr1Val);
+			
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<p>
+			<img src="pictno1.jpg" alt="test image" class="testimage" id="img1" />
+		</p>
+		<table id="table1" border="1">
+			<tr><th>属性</th><th>値</th></tr>
+		</table>
+	</body>
+</html>

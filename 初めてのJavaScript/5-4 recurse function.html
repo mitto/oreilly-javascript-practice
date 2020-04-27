@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			function runRecursion() {
+				var addNumbers = function sumNumbers(numArray, indexVal, resultSum, resultString) {
+					//終了条件のテスト
+					if(indexVal == numArray.length) {
+						document.writeln("合計は" + resultSum + "です。<br />");
+						document.writeln("全ての要素を列挙します：" + resultString + "<br />");
+						return;
+					}
+					
+					//終わりにならない場合加算を行う
+					resultSum += numArray[indexVal];
+					
+					//文字列の連結を行う
+					if (resultString != "") {
+						resultString += ", " + numArray[indexVal];
+					}
+					else {
+						resultString = numArray[indexVal];
+					}
+					
+					//添え字を増やす
+					indexVal++;
+					
+					//1増えた添え字で自分自身を呼び出す
+					return sumNumbers(numArray, indexVal, resultSum, resultString);
+				}
+				var numArray = [1, 35.4, -14, 44, 0.5]; //数値を記憶した配列を生成
+				addNumbers(numArray, 0, 0, ""); //関数の呼び出し
+			}
+			
+			runRecursion();
+			
+			//同じ処理をforループで書いたやつ
+			var numArray = [1, 35.4, -14, 44, 0.5];
+			var resultSum = 0;
+			var resultString = "";
+			for (var indexVal = 0; indexVal < numArray.length; indexVal++) {
+				resultSum += numArray[indexVal];
+				//文字列の連結を行う
+				resultString += (resultString != "") ? ", " + numArray[indexVal] : numArray[indexVal];
+			}
+			document.writeln("合計は" + resultSum + "です。<br />");
+			document.writeln("全ての要素を列挙します：" + resultString + "<br />");
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

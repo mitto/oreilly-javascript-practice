@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			function customObject() {
+				
+				var background = "#fff";
+				var state = "on";
+				
+				this.changeState = function() {
+					if (state == "on") {
+						state = "off";
+						background = "#000";
+					}
+					else {
+						state = "on";
+						background = "#fff";
+					};
+				}
+				
+				this.getColor = function() {
+					return background;
+				};
+				
+				this.getState = function() {
+					return state;
+				};
+			
+			}
+			
+			window.onload = function() {	
+				var t1 = new customObject();
+				var t2 = new customObject();
+				
+				t2.changeState();
+				
+				alert(t1.getState + ":" + t1.getColor);
+				alert(t2.getState + ":" + t2.getColor);
+			};
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

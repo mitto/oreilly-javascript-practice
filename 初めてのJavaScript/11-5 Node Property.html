@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				outputNodeProps(document);
+			}
+			
+			//無作為に色を作り出す
+			function randomColor() {
+				var r = Math.floor(Math.random() * 255).toString(16);
+				r = (r.length < 2) ? "0" + r : r;
+				var g = Math.floor(Math.random() * 255).toString(16);
+				g = (g.length < 2) ? "0" + g : g;
+				var b = Math.floor(Math.random() * 255).toString(16);
+				b = (b.length < 2) ? "0" + b : b;
+				return "#" + r + g +  b;
+			}
+			
+			//いくつかのノードプロパティを出力する
+			function outputNodeProps(nd) {
+				var strNode = "nodeType: "+ nd.nodeType;
+				strNode += "\nnodeName: " + nd.nodeName;
+				strNode += "\nnodeValue: " + nd.nodeValue;
+				
+				//styleをセットするなら(Elementオブジェクトのプロパティ)
+				if (nd.style) {
+					var color = randomColor();
+					nd.style.backgroundColor = color;
+					strNode += "\nbackgroundColor: " + color;
+				}
+				
+				//ノードのプロパティを出力する
+				//alert(strNode);
+				
+				//子ノードを処理する
+				var children = nd.childNodes;
+				for (var i = 0; i < children.length; i++) {
+					outputNodeProps(children[i]);
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<h1>見出し</h1>
+			<!--段落1-->
+			<p>ドキュメントツリーに関する理解を深めるために、headとbodyがあり、bodyの中に一つのdiv要素、そのdiv要素にはh1ヘッダと二つの段落を持つページを考えてみましょう。一つの段落には<i>Learning JavaSscript</i>というイタリック体の文字列が書かれており、もう一つの段落には画像が含まれています。</p>
+			<!--段落2-->
+			<p>第2段落には画像が含まれています。<img src="pictno0.jpg" alt="osprey" /></p>
+		</div>
+	</body>
+</html>

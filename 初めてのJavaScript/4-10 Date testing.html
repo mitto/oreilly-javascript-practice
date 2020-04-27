@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			function testingDate() {
+				var dtNow = new Date();
+				
+				//日、月、年の設定
+				dtNow.setDate(18);
+				dtNow.setMonth(10);
+				dtNow.setFullYear(1954);
+				dtNow.setHours(7);
+				dtNow.setMinutes(2);
+				
+				//フォーマットして出力
+				document.writeln("<p>");
+				document.writeln(dtNow.toString() + "<br />");
+				document.writeln(dtNow.toLocaleString()  + "<br />");
+				document.writeln(dtNow.toLocaleDateString() + "<br />");
+				document.writeln(dtNow.toLocaleTimeString() + "<br />");
+				document.writeln(dtNow.toGMTString() + "<br />");
+				document.writeln(dtNow.toUTCString() + "<br />");
+				document.writeln("</p>");
+			}
+		//]]>
+		</script>
+	</head>
+	<body onload="testingDate();">
+	</body>
+</html>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				color: red;
+			}
+		</style>
+	</head>
+	<body style="color: green;">
+		<p id="div1">
+			このパラグラフは赤字で表示されますが、document.getElementById("div1").style.colorの値はからになります。
+		</p>
+		<p id="div2" style="color: blue;">
+			このパラグラフは青地で表示され、document.getElementById("div2").style.colorの値も"blue"あるいは"#0000ff"といった値になります。
+		</p>
+		<p id="div3">
+			このパラグラフは緑色の字で表示されますが、document.getElementById("div3").style.colorの値はからになります。
+		</p>
+		<script type="text/javascript">
+		//<![CDATA[
+			alert("div1=" + document.getElementById("div1").style.color);
+			alert("div2=" + document.getElementById("div2").style.color);
+			alert("div3=" + document.getElementById("div3").style.color);
+		//]]>
+		</script>
+	</body>
+</html>

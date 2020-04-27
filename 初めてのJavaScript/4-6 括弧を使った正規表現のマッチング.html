@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/css; charset=UTF-8" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			window.onload = function() {
+				var re = /(ds)+(j+s)/ig;
+				var str = "cfdsJS *(&dsjjjsYJSjs 888 dsdsJS";
+				var str2 = "1234567891123456789212345678931";
+				var resultArray = re.exec(str);
+				while (resultArray) {
+					document.writeln('"' + resultArray[0] + '"にマッチしました');
+					document.writeln("次は" + (re.lastIndex + 1) + "文字目から検索します。<br />");
+					for (var i = 1; i < resultArray.length; i++) {
+						document.writeln("括弧内の部分文字列" + i + ": " + resultArray[i] + "<br />");
+					}
+					document.writeln("<br />");
+					resultArray = re.exec(str);
+				}
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

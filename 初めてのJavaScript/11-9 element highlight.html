@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			div {
+				border: 1px solid #000;
+				padding: 5px;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				document.getElementById("color").onclick = changeColor;
+				document.getElementById("load").onclick = loadPage;
+				document.getElementById("highlight").onclick = highlightElements;
+			}
+			
+			var highlightColor = "#ffff00";
+			
+			function changeColor() {
+				highlightColor = "#" + prompt("ハイライトするために使う色を指定してください(例：FF00FF)");
+			}
+			
+			function loadPage() {
+				var pageURL = prompt("同じドメイン内のページのURLを入力してください（例：ch11-02.html）");
+				top.docin.location.href = pageURL;
+			}
+			
+			function highlightElements() {
+				var elemTag = prompt("ハイライトするタグ要素を入力してください(例:p)");
+				var nodes = top.docin.document.getElementsByTagName(elemTag);
+				
+				//それぞれをハイライト
+				for (var i = 0; i < nodes.length; i++) {
+					nodes[i].style.backgroundColor = highlightColor;
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="color">
+			<p>ハイライトする色を変更するにはここをクリック</p>
+		</div>
+		<div id="load">
+			<p>左のフレームに別のページを読み込むにはここをクリック</p>
+		</div>
+		<div id="highlight">
+			<p>特定のタグ要素を検索してハイライトするにはここをクリック</p>
+		</div>
+	</body>
+</html>

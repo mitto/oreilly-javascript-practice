@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			var str = new String("羊,猿,鳥,犬,猪");
+			var array = str.split(",");
+			
+			document.writeln(array[2] + "<br />");
+			
+			array.reverse();
+			
+			for(var item in array) {
+				document.write(array[item] + ",");
+			}
+			
+			document.writeln("<br />");
+			
+			for(var i = 0; i < array.length; i++) {
+				document.writeln("array[" + i +"]=" + array[i] + "<br />");
+			} 
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

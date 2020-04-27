@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			catchEvent(window, "load", setupEvents);
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if(eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if (eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function cancelEvent(event) {
+				if(event.preventDefault) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				else {
+					event.returnValue = false;
+					event.cancelBubble = true;
+				}
+			}
+			
+			function setupEvents(event) {
+				catchEvent(document.getElementById("someForm"), "submit", validateForm);
+			}
+			
+			function validateForm(event) {
+				var theEvent = event ? event : window.event;
+				
+				var strResults = "";
+				var textInputs = document.getElementById("someForm").getElementsByTagName("input");
+				
+				for(var i = 0; i < textInputs.length; i++) {
+					if(textInputs[i].type != "submit") {
+						strResults += textInputs[i].value + "\n";
+					}
+				}
+				document.getElementById("text4").value = strResults;
+				cancelEvent(theEvent); //結果を消してしまわないようにキャンセル
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form id="someForm" action="">
+			<p>
+				<input type="text" name="text1" /><br />
+				<input type="password" name="text2" /><br />
+				<input type="hidden" name="text3" /><br />
+				<textarea name="text4" id="text4" cols="50" rows="10">テキストエリア</textarea><br />
+				<input type="submit" value="送信" />
+			</p>
+		</form>
+	</body>
+</html>

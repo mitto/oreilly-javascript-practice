@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			var Tune = function(title) {
+				this.title = title;
+				
+				var performedBy = new Array();
+				this.addPerformer = function(performer) {
+					var i = performedBy.length;
+					performedBy[i] = performer;
+				}
+				
+				this.listPerformers = function() {
+					var singers = "";
+					for (var i = 0, len = performedBy.length; i < len; i++) {
+						singers += performedBy[i] + " ";
+					}
+					return singers;
+				}
+			}
+			
+			window.onload = function() {
+				var song = new Tune("なごり雪");
+				song.addPerformer("イルカ");
+				song.addPerformer("平原綾香");
+				song.addPerformer("伊勢正三");
+				
+				var singers = song.listPerformers();
+				document.writeln("<p>曲：" + song.title + "<br />");
+				document.writeln("歌手：" + singers + "</p>");
+				
+				var song = new Tune("WINDING ROAD");
+				song.addPerformer("絢香×コブクロ");
+				song.addPerformer("つるの剛士");
+				
+				var singers = song.listPerformers();
+				document.writeln("<p>曲：" + song.title + "<br />");
+				document.writeln("歌手：" + singers + "</p>");
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

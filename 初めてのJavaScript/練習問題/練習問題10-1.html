@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+		
+			if (navigator.cookieEnabled) {
+				var flag = new Boolean(readCookie("isFlag"));
+				
+				if (flag == false) {
+					document.write("はじめまして。");
+					setCookie("isFlag", "true");
+				}
+				else {
+					document.write("こんにちは");
+				}
+			}
+			else {
+				alert("このページはクッキーの利用を前提としております。\nブラウザの設定を変更してからご利用ください。");
+			}
+			
+			function readCookie(key) {
+				var cookie = document.cookie;
+				var first = cookie.indexOf(key + "=");
+				
+				if (first >= 0) {
+					var value = cookie.substring(first, cookie.length);
+					var last = value.indexOf(";");
+					
+					if (last < 0) last = value.length;
+					var str = value.substring(0, last).split("=");
+					return unescape(str[1]);
+				}
+				else {
+					return null;
+				}
+			}
+			
+			function setCookie(key, value) {
+				var cookieDate = new Date(2012, 1, 1, 0, 0, 0);
+				document.cookie = key + "=" + escape(value) + "; expire=" + cookieDate.toGMTString() + "; path=/";
+			}
+			
+			function deleteCookie(key) {
+				var cookieDate = new Date(2000, 0, 1, 0, 0, 0);
+				document.cookie = key + "=; expire=" + cookieDate.toGMTString() + "; path=/";
+			}
+		
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

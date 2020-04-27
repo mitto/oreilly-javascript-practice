@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				background-color: #ffff00;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			document.onclick = changeElement;
+			
+			function getStyle(obj, jsprop) {
+				if (obj.currentStyle) {
+					return obj.currentStyle[jsprop];
+				}
+				else if (window.getComputedStyle) {
+					return window.getComputedStyle(obj, null)[jsprop];
+				}
+				else {
+					return null;
+				}
+			}
+			
+			function changeElement() {
+				var obj = document.getElementById("div1");
+				
+				alert("style.backgroundColor = " + obj.style.backgroundColor);
+				
+				var color = getStyle(obj, "backgroundColor", "background-color");
+				
+				alert("関数getStyleから戻ってきた色 = " + color);
+				
+				obj.style.backgroundColor = "#ff0000";
+				color = getStyle(obj, "backgroundColor", "background-color");
+				
+				alert("新しく設定した色(style.backgroundColor) = " + obj.style.backgroundColor);
+				alert("新しく設定した色(getStyleからの戻り値) = " + color);
+				
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<p>これはDIV要素です。</p>
+		</div>
+	</body>
+</html>

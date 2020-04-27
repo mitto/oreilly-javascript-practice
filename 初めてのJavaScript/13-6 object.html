@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			div {
+				margin: 20px;
+				width: 200px;
+				height: 200px;
+			}
+			
+			#div1 {
+				background-color: #ffff00;
+			}
+			
+			#div2 {
+				background-color: #00ff00;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			var flipper = {
+				obj1 : null,
+				obj2 : null,
+				getStyle : function(obj, jsStyleName) {
+					if (obj.currentStyle) {
+						return obj.currentStyle[jsStyleName];
+					}
+					else if (window.getComputedStyle) {
+						return window.getComputedStyle(obj, null)[jsStyleName];
+					}
+					else {
+						return undefined;
+					}
+				},
+				setBackgroundColor : function(obj, color) {
+					obj.style.backgroundColor = color;
+				},
+				flipColors : function() {
+					var color1 = this.getStyle(this.obj1, "backgroundColor");
+					var color2 = this.getStyle(this.obj2, "backgroundColor");
+					this.setBackgroundColor(this.obj1, color2);
+					this.setBackgroundColor(this.obj2, color1);
+				}
+			};
+			
+			window.onload = function() {
+				flipper.obj1 = document.getElementById("div1");
+				flipper.obj2 = document.getElementById("div2");
+			}
+			
+			document.onclick = function() {
+				flipper.flipColors();
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			<p>一つ目の正方形</p>
+		</div>
+		<div id="div2">
+			<p>二つ目の正方形</p>
+		</div>
+	</body>
+</html>

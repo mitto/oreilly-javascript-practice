@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				var namedElements = "";
+				
+				//[elem + 数字]というパターンの名前の要素をすべて取得する
+				for (var i = 1; i <= 7; i++) {
+					var nameList = document.getElementsByName("elem" + i);
+					
+					//取得した要素の種類を並べて表記する文字列を作成する
+					for (var j = 0; j < nameList.length; j++) {
+						namedElements += nameList[j].tagName + " ";
+					}
+				}
+				alert(namedElements);
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div name="elem1">
+			<ul name="elem2">
+				<li>選択肢1</li>
+				<li name="elem3">選択肢2</li>
+			</ul>
+		</div>
+		<a href="example11-03.html" name="elem4">リンク1</a>
+		<p name="elem5">パラグラフ</p>
+		<form name="elem6">
+			<input type="text" name="elem7" />
+		</form>
+	</body>
+</html>

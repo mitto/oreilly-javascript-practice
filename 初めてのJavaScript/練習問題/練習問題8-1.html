@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			catchEvent(window, "load", setupEvents);
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if(eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if(eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function cancelEvent(event) {
+				if(event.preventDefault) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				else {
+					event.returnValue = false;
+					event.cancelBubble = true;
+				}
+			}
+			
+			function setupEvents(event) {
+				catchEvent(document.getElementById("someForm"), "submit", checkColors);
+			}
+			
+			function checkColors(event) {
+				var theEvent = event ? event : window.event;
+				var colorOpts = document.getElementById("someForm").getElementsByTagName("input");
+				
+				var message = "どれか一つ色を選んでください";
+				
+				for(var i = 0; i < colorOpts.length; i++) {
+					if(colorOpts[i].checked) {
+						var color = parseInt((Math.random() * 4));
+						switch(color) {
+							case 0:
+								message = "大吉";
+								break;
+							case 1:
+								message = "小吉";
+								break;
+							case 2:
+								message = "中吉";
+								break;
+							case 3:
+								message = "凶";
+								break;
+						}
+						message = "今日のあなたの運勢は" + message + "です。";
+						break;
+					}
+				}
+				alert(message);
+				cancelEvent(theEvent);
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<h2>今日のカラー占い</h2>
+		<p>お好みの色をお選びください。</p>
+		<form id="someForm" action="">
+			<input type="radio" value="赤" name="radiogroup" />赤
+			<input type="radio" value="青" name="radiogroup" />青
+			<input type="radio" value="黄色" name="radiogroup" />黄色
+			<input type="radio" value="白" name="radiogroup" />白<br />
+			<input type="submit" value="送信" />
+		</form>
+	</body>
+</html>

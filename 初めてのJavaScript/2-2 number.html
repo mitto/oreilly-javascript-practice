@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title>例2-2 parseIntとparseFloat</title>
+		<script type="text/javascript">
+		//<![CDATA[
+			function convertToNumber() {
+				var sNum = "1.23e-2";
+				document.writeln("<p>parseFloatの結果:" + parseFloat(sNum) + "<br />");
+				document.writeln("parseIntの結果:" + parseInt(sNum) + "</p>");
+				
+				var fValue = parseFloat("1.45 cm");
+				document.writeln("<p>parseFloatの結果:" + fValue + "</p>");
+				
+				var iValue = parseInt("-33.50");
+				document.writeln("<p>parseIntの結果:" + iValue + "</p>");
+				
+				iValue = parseInt("100", 8); //8進数として解釈
+				document.writeln("<p>" + iValue + "</p>");
+				
+				iValue = parseInt("B2", 16); //16進数として解釈
+				document.writeln("<p>" + iValue + "</p>");
+			}
+		//]]>
+		</script>
+	</head>
+	<body onload="convertToNumber();">
+	</body>
+</html>

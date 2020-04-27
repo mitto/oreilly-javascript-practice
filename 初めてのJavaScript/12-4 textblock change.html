@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+		
+			window.onload = function() {
+				document.getElementById("smaller").onclick = makeLess;
+				document.getElementById("larger").onclick = makeMore;
+			}
+			
+			function makeMore() {
+				var div = document.getElementById("div1");
+				div.style.fontSize = "larger";
+				div.style.letterSpacing = "10px";
+				div.style.textAlign = "justify";
+				div.style.textTransform = "uppercase";
+				div.style.fontSize = "xx-larger";
+				div.style.fontWeight = "900";
+				div.style.lineHeight = "40px";
+			}
+			
+			function makeLess() {
+				var div = document.getElementById("div1");
+				div.style.fontSize = "smaller";
+				div.style.letterSpacing = "normal";
+				div.style.textAlign = "left";
+				div.style.textTransform = "none";
+				div.style.fontSize = "medium";
+				div.style.fontWeight = "normal";
+				div.style.lineHeight = "normal";
+			}
+		
+		//]]>
+		</script>
+	</head>
+	<body>
+		<p style="font-size: larger; font-weight: 900;">
+			<span id="smaller">
+				テキストを縮小
+			</span>
+			&nbsp;&nbsp;
+			<span id="larger">
+				テキストを拡大
+			</span>
+		</p>
+		<div id="div1">
+			<p>
+				視覚的表現を左右するHTML要素の一つにフォントがあります。フォントやテキスト関連の属性の変更はインパクトが非常に大きく、ほかの属性の変更でこれほどのインパクトを与えるものは多くありません。
+			</p>
+			<p>
+				fontは文字そのものに関連するもので、フォントの種類、フォントサイズ、フォントタイプといった文字の外観を制御します。一方、textはもっと装飾的で、文字列に対して適用され、文字列の下線、上線、打ち消し線、および水平方向でのそろえ方などを制御します。
+			</p>
+		</div>
+	</body>
+</html>

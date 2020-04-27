@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			function pushPop() {
+				//FIFO待ち行列を作成し、pushを使ってアイテムを追加
+				var fifoArray = new Array();
+				fifoArray.push("林檎");
+				fifoArray.push("バナナ");
+				
+				var ln = fifoArray.push("桜桃");
+				
+				//長さと配列を表示
+				document.writeln("長さは" + ln + "で、行列の順番は" + fifoArray + "です。<br />");
+				document.writeln("<p>");
+				
+				//shiftを使って配列からアイテムを外す
+				for (var i = 0; i < ln; i++) {
+					document.writeln(fifoArray.shift() + "を取り出します。今の順番は[", fifoArray, "]です。<br />");
+				}
+				
+				document.writeln("長さは" + fifoArray.length + "となりました。<br /><br />");
+				
+				//次に、popとunshiftも同様に行う
+				var fifoNewArray = new Array();
+				
+				fifoNewArray.unshift("初めての");
+				fifoNewArray.unshift("Java");
+				ln = fifoNewArray.unshift("Script");
+				document.writeln("長さは" + ln + "で配列は[" + fifoNewArray + "]となりました<br />");
+				
+				//pop
+				for(var i = 0; i < ln; i++) {
+					document.writeln("「" + fifoNewArray.pop() + "」を取り出します。配列は[" + fifoNewArray + "]となりました。<br />");
+				}
+				
+				document.writeln("長さは" + fifoNewArray.length + "になりました。");
+				document.writeln("</p>");
+			}
+		//]]>
+		</script>
+	</head>
+	<body onload="pushPop();">
+	</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			catchEvent(window, "load", setupEvents);
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if (eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if (eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			function cancelEvent(event) {
+				if (event.preventDefault) {
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				else {
+					event.returnValue = false;
+					event.cancelBubble = true;
+				}
+			}
+			
+			function setupEvents(event) {
+				catchEvent(document.getElementById("someForm"), "submit", runCheck);
+			}
+			
+			function runCheck(event) {
+				var theEvent = event ? event : window.event;
+				var regexp = document.getElementById("text1").value;
+				var rgEx = new RegExp(regexp.toString(), "ig");
+				var testString = document.getElementById("text2").value;
+				var OK = rgEx.exec(testString);
+				
+				var result = "<p>マッチしました</p>";
+				
+				if (!OK) {
+					result = "<p style='color: red;'>マッチしません</p>";
+				}
+				
+				document.getElementById("result").innerHTML = result;
+				
+				cancelEvent(theEvent);
+			}
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form name="someForm" id="someForm" style="padding:10px">
+			<p>
+				正規表現：<input type="text" id="text1" /><br />
+				文字列：<input type="text" id="text2" /><br />
+				<input type="submit" value="正規表現をチェック" />
+			</p>
+		</form>
+		<div id="result">
+		</div>
+	</body>
+</html>

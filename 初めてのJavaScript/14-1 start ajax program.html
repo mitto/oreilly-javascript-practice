@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title>例14-1 最初のAjaxプログラム</title>
+		<style type="text/css">
+			div.elem {
+				margin: 20px;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			catchEvent(window, "load", function() {
+				document.getElementById("cities").style.display = "block";
+				//document.getElementById("submitButton").style.display = "none";
+				//document.getElementById("stateList").onchange = populateList;
+			});
+			
+			var xmlhttp = getXmlHttp();
+			
+			function catchEvent(eventObj, event, eventHandler) {
+				if (eventObj.addEventListener) {
+					eventObj.addEventListener(event, eventHandler, false);
+				}
+				else if (eventObj.attachEvent) {
+					event = "on" + event;
+					eventObj.attachEvent(event, eventHandler);
+				}
+			}
+			
+			//XHRオブジェクトの作成
+			function getXmlHttp() {
+				var xmlhttp = null;
+				if (window.XMLHttpRequest) {
+					xmlhttp = new XMLHttpRequest();
+				}
+				else if (window.ActiveXObject) {
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				return xmlhttp;
+			}
+			
+			//準備とXHRリクエストの送信
+			function populateList() {
+				var pref = document.forms[0].elements[0].value;
+				var url = "http://localhost/ch14-02.php?pref=" + pref;
+				console.log(url);
+				xmlhttp.open("GET", url, true);
+				xmlhttp.onreadystatechange = getCities;
+				xmlhttp.send(null);
+			}
+			
+			function getCities() {
+				if (xmlhttp.readyState == 4) {
+					document.getElementById("cities").innerHTML = "<select>" + xmlhttp.responseText + "</select>";
+					console.log(xmlhttp.responseText);
+				}
+				else {
+					document.getElementById("cities").innerHTML ="エラー：失敗しました！";
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<h3>都道府県</h3>
+		<form action="http://localhost/startjavascript/ch14-02.php" method="get">
+			<div class="elem">
+				<select onchange="populateList()">
+					<option value="HO">北海道</option>
+					<option value="FU">福井県</option>
+					<option value="NA">長野県</option>
+					<option value="KO">沖縄県</option>
+				</select>
+			</div>
+			<h3>都市</h3>
+			<div class="elem" id="cities">
+				<select>
+				</select>
+			</div>
+			<!--<input type="submit" id="submitButton" value="送信" />-->
+		</form>
+	</body>
+</html>

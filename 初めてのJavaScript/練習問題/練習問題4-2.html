@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			var str = "The fun of function is that they are functional.";
+			
+			var regExp = /\bfun\b/g;
+			var regExp2 = /fun/g;
+			
+			var str2 = str.replace(regExp, "power");
+			var str3 = str.replace("fun", "power");
+			var str4 = str.replace(regExp2, "power");
+			
+			document.writeln(str2 + "<br />");
+			document.writeln(str3 + "<br />");
+			document.writeln(str4);
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

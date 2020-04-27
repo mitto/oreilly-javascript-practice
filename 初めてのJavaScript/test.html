@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+		
+			window.onload = function() {
+				
+				var result = "";
+				var testArray = new Array();
+				
+				for (var i = 0; i < 10000000; i++) {
+					testArray[i] = 0;
+				}
+				
+				var start = new Date();
+				
+				for (var i = 0; i < testArray.length; i++) {
+					testArray[i] += i;
+				}
+				
+				var stop = new Date();
+				
+				console.log(start.getSeconds() + " " + start.getMilliseconds());
+				console.log(stop.getSeconds() + " " + stop.getMilliseconds());
+				var diff = stop - start;
+				result += "lenを変数化しない場合：" + diff.toString() + "\n";
+				
+				start = new Date();
+				
+				for (var i = 0, len = testArray.length; i < len; i++) {
+					testArray[i] += i;
+				}
+				
+				stop = new Date();
+
+				console.log(start.getSeconds() + " " + start.getMilliseconds());
+				console.log(stop.getSeconds() + " " + stop.getMilliseconds());
+				
+				diff = stop - start;
+				
+				result += "lenを変数した場合：" + diff + "\n";
+				
+				alert(result);
+				
+			}
+		
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

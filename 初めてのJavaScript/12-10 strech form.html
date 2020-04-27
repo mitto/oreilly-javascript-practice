@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<style type="text/css">
+			.label {
+				background-color: #003;
+				width: 400px;
+				padding: 10px;
+				margin: 0 20px;
+				color: #fff;
+				text-align: center;
+				border-bottom: 1px solid #fff;
+				cursor: pointer;
+			}
+			
+			.elements {
+				background-color: #ccd9ff;
+				margin: 0 20px;
+				padding: 10px;
+				width: 400px;
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				var elems = null;
+				var labels = null;
+				
+				//特定のクラスを指定されている要素をすべて集める
+				if (document.querySelectAll) {
+					elems = document.querySelectorAll(".elements");
+					labels = document.querySelectorAll(".label");
+				}
+				else if (document.getElementsByClassName) {
+					elems = document.getElementsByClassName("elements");
+					labels = document.getElementsByClassName("label");
+				}
+				
+				if (elems) {
+					for (var i = 0, len = elems.length; i < len; i++) {
+						elems[i].style.display = "none";
+					}
+					for (var i = 0, len = labels.length; i < len; i++) {
+						labels[i].onclick = showBlock;
+					}
+				}
+			}
+			
+			function showBlock(event) {
+				var theEvent = event ? event : window.event;
+				var theSrc = theEvent.target ? theEvent.target : theEvent.srcElement;
+				var itemId = "elements" + theSrc.id.substring(5);
+				var item = document.getElementById(itemId);
+				
+				if (item.style.display == "none") {
+					item.style.display = "block";
+				}
+				else {
+					item.style.display = "none";
+				}
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<form action="">
+			<div class="label" id="label1">
+				お名前
+			</div>
+			<div class="elements" id="elements1">
+				<label>姓</label><input type="text" name="lastname" /><br />
+				<label>名</label><input type="text" name="firstname" /><br />
+			</div>
+			<div class="label" id="label2">
+				ご住所
+			</div>
+			<div class="elements" id="elements2">
+				<label>都道府県</label><input type="text" name="prefecture" /><br />
+				<label>市区町村</label><input type="text" name="city" /><br />
+				<label>番地等 　</label><input type="text" name="street" /><br />
+			</div>
+		</form>
+		<p>
+			折りたたみ式のフォームです。<br />
+			｢お名前｣あるいは｢ご住所｣をクリックすると、その下に記入用のフォームが現れます。
+		</p>
+		<noscript>
+			<p>JavaScriptが無効になっている場合は、最初から全項目が表示されます。</p>
+		</noscript>
+	</body>
+</html>

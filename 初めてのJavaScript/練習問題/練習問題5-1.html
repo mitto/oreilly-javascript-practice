@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			function calcFactorialRecursively(x) {
+				
+				if (x <= 1) {
+					document.write(x);
+				
+					return 1;
+				}
+				
+				document.write(x + " * ");
+						
+				return x * calcFactorialRecursively(x - 1);
+				
+			}
+			
+			function calcFactorialWithLoop(x) {
+				
+				var str = "";
+				var calc = 1;
+				
+				document.writeln("<h3>カウントダウンバージョン</h3>");
+				
+				for(var i = x; i > 0; i--) {
+				
+					str += (str == "") ? i : " * " + i;
+					
+					calc *= i;
+				
+				}
+				
+				document.writeln(str + "<br />" + calc + "<br />");
+				
+				str = "";
+				calc = 1;
+				
+				document.writeln("<h3>逆順バージョン</h3>");
+				
+				for(var i = 1; i <= x; i++) {
+					
+					str += (str == "") ? i : " * " + i;
+					
+					calc *= i;
+					
+				}
+				
+				document.writeln(str + "<br />" + calc);
+			}
+			
+			document.writeln("<h2>calcFactorialWithLoop</h2>");
+			calcFactorialWithLoop(5);
+			
+			document.writeln("<br />");
+			
+			document.writeln("<h2>calcFactorialRecursively</h2>");
+			var result = calcFactorialRecursively(5);
+			document.writeln("<br />" + result);
+		//]]>
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

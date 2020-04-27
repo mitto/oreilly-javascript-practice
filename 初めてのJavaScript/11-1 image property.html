@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			window.onload = function() {
+				var img = document.images[0];
+				
+				//既存の画像の属性を取り出す
+				var imgAttr = img.id + " " + img.alt + " " + img.className;
+				alert(imgAttr);
+				
+				//属性を変更する
+				img.src = "pictno2.jpg";
+				img.width = "800";
+				img.height = "Alternative";
+				img.align = "left";
+				img.title = "Osprey";
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<p>
+			<img src="pictno1.jpg" alt="test image" class="testimage" id="original" />
+		</p>
+	</body>
+</html>

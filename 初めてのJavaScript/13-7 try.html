@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Content-Style-Type" content="text/css" />
+		<meta http-equiv="Content-Script-Type" content="text/javascript" />
+		<title></title>
+		<script type="text/javascript">
+		//<![CDATA[
+			
+			var div1;
+			
+			document.onload = function() {
+				div = document.getElementById("div1");
+				div1 = new DivObj(div);
+				div1.objSetOpacity(0.5); //不透明度の初期値を設定
+			}
+			
+			document.onclick = changeOpacity;
+			
+			function alphaOpacity(value) {
+				if (typeof value == "number") {
+					var opacity = value * 100;
+					this.style.filter = "alpha(opacity:" + opacity + ")";
+				}
+				else {
+					throw "非数値";
+				}
+			}
+			
+			function cssOpacity(value) {
+				if (typeof value == "number") {
+					this.obj.style.opacity = value;
+				}
+				else {
+					throw "非数値";
+				}
+			}
+			
+			function getOpacity() {
+				if (this.obj.style.filter) {
+					var filterString = this.obj.style.filter;
+					var derivedVal = filterString.substring(filterString.indexOf(":") + 1, filterString.indexOf(")"));
+					return derivedVal / 100;
+				}
+				else {
+					return this.obj.style.opacity;
+				}
+			}
+			
+			function changeOpacity() {
+				try {
+					//div1
+					var currentOpacity = div1.objGetOpacity();
+					currentOpacity += 0.1;
+					div.objSetOpacity(currentOpacity);
+				}
+				catch (e) {
+					alert(e);
+				}
+			}
+			
+			function DivObj(obj) {
+				this.obj = obj;
+				this.objGetOpacity = getOpacity;
+				this.objSetOpacity = obj.style.filter ? alphaOpacity : cssOpacity;
+			}
+			
+		//]]>
+		</script>
+	</head>
+	<body>
+		<div id="div1" style="opacity: 0.0; filter: alpha(opacity=0)">
+			<img src="../pictno1.jpg" width="640" height="480" alt="" />
+		</div>
+	</body>
+</html>
